@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE GREEN HOUSE | Global Research Journal</title>
+<link rel="icon" type="image/png" href="favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .serif { font-family: 'Playfair Display', serif; }
+        .hidden-page { display: none; }
+        .fade-in { animation: fadeIn 0.6s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        /* Sidebar Transition */
+        #sidebar { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); transform: translateX(-100%); }
+        #sidebar.open { transform: translateX(0); }
+
+        /* Custom Input Styling */
+        .newsletter-input {
+            border: none;
+            border-bottom: 1px solid #000;
+            padding: 10px 0;
+            width: 100%;
+            background: transparent;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .newsletter-input:focus {
+            border-bottom-color: #059669; /* Emerald 600 */
+        }
+    </style>
+</head>
+<body class="bg-white text-black antialiased overflow-x-hidden">
+
+    <!-- SIDEBAR NAVIGATION -->
+    <div id="sidebar" class="fixed inset-y-0 left-0 w-80 bg-white z-[100] border-r border-gray-100 p-10 flex flex-col">
+        <button onclick="toggleMenu()" class="text-left text-xs font-bold uppercase tracking-widest mb-20 hover:text-red-600">✕ Close</button>
+        
+        <div class="flex flex-col space-y-8">
+             <button  onclick="showPage('about'); toggleMenu()" class="text-left text-3xl serif italic hover:text-emerald-700 transition">About the Journal</button>
+            <button onclick="showPage('collective'); toggleMenu()" class="text-left text-3xl serif italic hover:text-emerald-700 transition">The Collective</button>
+            <hr class="border-gray-100">
+            <div class="flex flex-col space-y-4">
+                <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400">Collaborate</span>
+                <a href="mailto:contact.thg00@yahoo.com" class="text-sm font-bold hover:text-emerald-600 transition underline">Submit Your Research</a>
+                <a href="https://www.instagram.com/tgh.reports" class="text-sm font-bold hover:text-emerald-600 transition">Instagram</a>
+                <a href="https://x.com/tgh_reports" class="text-sm font-bold hover:text-emerald-600 transition">X / Twitter</a>
+            </div>
+        </div>
+    </div>
+    <div id="overlay" onclick="toggleMenu()" class="fixed inset-0 bg-black/10 hidden z-[95]"></div>
+
+    <!-- MAIN STICKY NAVIGATION -->
+    <nav class="border-b border-gray-100 bg-white/90 backdrop-blur-md pt-16 pb-8 sticky top-0 z-[90]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-center mb-8">
+                <div class="w-1/3 flex justify-start">
+                    <button onclick="toggleMenu()" class="text-xl hover:opacity-50 transition">☰</button>
+                </div>
+                <div class="w-1/3 text-center">
+                    <button onclick="showPage('home')" class="outline-none">
+                        <h1 class="notranslate text-5xl font-bold tracking-tighter uppercase">The Green House</h1>
+                    </button>
+                </div>
+                <div class="w-1/3 flex justify-end items-center space-x-6 text-[11px] font-bold uppercase tracking-widest">
+                    <div id="google_translate_element" class="scale-75 origin-right"></div>
+                    <button onclick="showPage('collective')" class="hover:text-emerald-600 transition">Join Us</button>
+                    <span class="text-gray-200">|</span>
+                    <button onclick="toggleLogin()" class="flex items-center hover:text-emerald-600 transition">Sign In</button>
+                    <button class="hover:text-emerald-600 transition">
+                    <button onclick="toggleSearch()" class="hover:text-emerald-600 transition">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+    </svg>
+</button>
+                </div>
+            </div>
+            <div class="flex flex-wrap justify-center gap-8 text-[11px] font-bold uppercase tracking-[0.2em]">
+                <button onclick="showPage('environment')" class="hover:text-emerald-600 transition text-gray-500">Environment</button>
+                <button onclick="showPage('ecosystems')" class="hover:text-emerald-600 transition text-gray-500">Ecosystems</button>
+                <button onclick="showPage('health')" class="hover:text-emerald-600 transition text-gray-500">Health & Planet</button>
+                <button onclick="showPage('wildlife')" class="hover:text-emerald-600 transition text-gray-500">Wildlife</button>
+                <button onclick="showPage('youth')" class="text-red-600 hover:underline transition">Youth Voices</button>
+                <button onclick="showPage('economy')" class="hover:text-emerald-600 transition text-gray-500">Green Economy</button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- PAGE: HOME -->
+        <div id="page-home" class="fade-in">
+            <section class="px-6 py-20 max-w-7xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-12 items-end border-b border-black pb-20">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-widest text-red-600 mb-4 block">Featured Report</span>
+                        <h2 class="text-7xl serif italic leading-tight mb-8">The Soil Salinity Crisis</h2>
+                        <p class="text-sm leading-relaxed text-gray-600 max-w-md">Documenting the environmental shift in the Senegal River Basin through investigative research and global data analysis.</p>
+                    </div>
+                    <div class="aspect-[4/5] bg-gray-100 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-700">
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- CATEGORY: ENVIRONMENT -->
+        <div id="page-environment" class="hidden-page fade-in px-6 py-24 max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-7xl serif italic mb-6">Environment</h2>
+                <p class="text-sm uppercase tracking-[0.3em] text-emerald-600 font-bold mb-8">The Foundation of Existence</p>
+                <div class="max-w-2xl mx-auto border-t border-b border-gray-100 py-10">
+                    <p class="text-sm leading-loose text-gray-600 italic">Investigating the structural changes of our planet. This category focuses on atmospheric shifts, climate data, and the physical evolution of the Earth’s core systems. We document the macro-changes that define our era.</p>
+                </div>
+            </div>
+            <div class="bg-gray-50 p-20 border border-dashed border-gray-300 text-center">
+                <h3 class="text-xl font-bold uppercase mb-4">Are you a Researcher?</h3>
+                <p class="text-sm text-gray-500 mb-8">We are currently accepting submissions for the Environment category.</p>
+                <a href="mailto:contact.thg00@yahoo.com" class="text-[10px] font-bold uppercase underline">Submit Your Abstract</a>
+            </div>
+        </div>
+
+        <!-- CATEGORY: ECOSYSTEMS -->
+        <div id="page-ecosystems" class="hidden-page fade-in px-6 py-24 max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-7xl serif italic mb-6">Ecosystems</h2>
+                <p class="text-sm uppercase tracking-[0.3em] text-emerald-600 font-bold mb-8">The Web of Connection</p>
+                <div class="max-w-2xl mx-auto border-t border-b border-gray-100 py-10">
+                    <p class="text-sm leading-loose text-gray-600 italic">A deep dive into the symbiotic relationships between organisms and their environments. We explore the delicate balance of biomes, from the Amazonian canopy to the microscopic life in our soil.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CATEGORY: HEALTH & PLANET -->
+        <div id="page-health" class="hidden-page fade-in px-6 py-24 max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-7xl serif italic mb-6">Health & Planet</h2>
+                <p class="text-sm uppercase tracking-[0.3em] text-emerald-600 font-bold mb-8">The Vital Intersections</p>
+                <div class="max-w-2xl mx-auto border-t border-b border-gray-100 py-10">
+                    <p class="text-sm leading-loose text-gray-600 italic">Where environmental science meets human wellbeing. This section investigates how pollution, climate change, and habitat loss directly impact global public health and the resilience of human communities.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CATEGORY: WILDLIFE -->
+        <div id="page-wildlife" class="hidden-page fade-in px-6 py-24 max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-7xl serif italic mb-6">Wildlife</h2>
+                <p class="text-sm uppercase tracking-[0.3em] text-emerald-600 font-bold mb-8">Guardians of Diversity</p>
+                <div class="max-w-2xl mx-auto border-t border-b border-gray-100 py-10">
+                    <p class="text-sm leading-loose text-gray-600 italic">Reporting on the frontlines of conservation. We curate research on endangered species, migratory patterns, and the biological necessity of maintaining Earth’s diverse animal kingdom.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CATEGORY: YOUTH VOICES -->
+        <div id="page-youth" class="hidden-page fade-in px-6 py-24 max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-7xl serif italic mb-6 text-red-600">Youth Voices</h2>
+                <p class="text-sm uppercase tracking-[0.3em] text-gray-400 font-bold mb-8">The Architects of Tomorrow</p>
+                <div class="max-w-2xl mx-auto border-t border-b border-gray-100 py-10">
+                    <p class="text-sm leading-loose text-gray-600 italic">The frontlines of change belong to the next generation. Here, we amplify the perspectives, research, and grassroots movements led by young leaders under 30 who are redefining environmental activism.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CATEGORY: GREEN ECONOMY -->
+        <div id="page-economy" class="hidden-page fade-in px-6 py-24 max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-7xl serif italic mb-6">Green Economy</h2>
+                <p class="text-sm uppercase tracking-[0.3em] text-emerald-600 font-bold mb-8">Sustainable Valuations</p>
+                <div class="max-w-2xl mx-auto border-t border-b border-gray-100 py-10">
+                    <p class="text-sm leading-loose text-gray-600 italic">Rethinking the global financial structure. We analyze circular economies, green tech investments, and the economic policies required to decouple growth from environmental destruction.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE: THE COLLECTIVE -->
+        <div id="page-collective" class="hidden-page fade-in px-6 py-24 max-w-5xl mx-auto text-center">
+            <h2 class="text-7xl font-bold uppercase tracking-tighter mb-10">The Collective</h2>
+            <p class="text-xs font-bold uppercase tracking-[0.4em] mb-20 text-emerald-600">Join our network of researchers and writers</p>
+            
+            <div class="grid md:grid-cols-2 gap-20 text-left">
+                <div>
+                    <h4 class="text-2xl serif italic mb-6 border-b border-black pb-4">Our Vision</h4>
+                    <p class="text-sm leading-loose text-gray-600">We bridge the gap between scientific journals and public action. We believe research shouldn't just be filed away; it should be seen, understood, and used to drive global resilience.</p>
+                </div>
+                <div>
+                    <h4 class="text-2xl serif italic mb-6 border-b border-black pb-4">How to Contribute</h4>
+                    <p class="text-sm leading-loose text-gray-600">We are seeking journalists, writers, and environmental researchers to share their peer-reviewed findings in a visually prestigious format.</p>
+                    <a href="mailto:contact.thg00@yahoo.com" class="inline-block mt-8 text-xs font-bold uppercase tracking-widest border border-black py-4 px-8 hover:bg-black hover:text-white transition">Apply to Join</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE: ABOUT -->
+        <div id="page-about" class="hidden-page fade-in px-6 py-24 max-w-3xl mx-auto">
+            <h2 class="text-5xl serif italic mb-10">Bridging Research & Global Action</h2>
+            <p class="text-lg leading-relaxed text-gray-700 mb-6">The Green House is a multi-lingual digital publication headquartered in Dakar, Senegal. We curate investigative reports on climate resilience, green economics, and environmental health.</p>
+            <p class="text-sm text-gray-500 uppercase tracking-widest">Founded 2026 • Dakar, Senegal</p>
+        </div>
+
+        <!-- NEWSLETTER SECTION (NEW) -->
+        <section class="bg-white border-t border-black py-24 px-6 mt-32">
+            <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-4xl serif italic mb-4">Stay Informed</h2>
+                    <p class="text-sm text-gray-500 uppercase tracking-[0.2em]">Monthly Research Summaries Directly to Your Inbox</p>
+                </div>
+                <div>
+                    <form class="flex flex-col space-y-6">
+                        <input type="email" placeholder="YOUR EMAIL ADDRESS" class="newsletter-input text-xs font-bold  tracking-widest">
+                        <div class="flex items-center space-x-4">
+                            <button type="submit" class="bg-black text-white text-[10px] font-bold uppercase tracking-widest px-10 py-4 hover:bg-emerald-600 transition">Subscribe</button>
+                            <p class="text-[9px] text-gray-400 leading-tight uppercase tracking-tighter">By subscribing, you agree to receive <br> the monthly TGH Report.</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-50 py-24 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-16">
+            <div>
+                <h4 class="text-2xl font-bold uppercase tracking-tighter mb-6">The Green House</h4>
+                <p class="text-xs text-gray-400 leading-loose italic">Research. Action. Resilience.</p>
+            </div>
+            <div class="flex flex-col space-y-4">
+                <span class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Connect</span>
+                <a href="https://www.instagram.com/tgh.reports" target="_blank" class="text-xs font-bold uppercase hover:text-emerald-600 transition">Instagram</a>
+                <a href="https://x.com/tgh_reports" target="_blank" class="text-xs font-bold uppercase hover:text-emerald-600 transition">X / Twitter</a>
+            </div>
+            <div class="flex flex-col space-y-4">
+                <span class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Journal</span>
+                <a href="mailto:contact.thg00@yahoo.com" class="text-xs font-bold uppercase hover:text-emerald-600 transition">Submit Work</a>
+                <p class="text-[10px] text-gray-300 uppercase mt-4">© 2026 THE GREEN HOUSE JOURNAL</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Change this: -->
+<input type="email" placeholder="YOUR EMAIL ADDRESS" class="newsletter-input text-xs font-bold uppercase tracking-widest">
+
+<!-- To this (remove 'uppercase'): -->
+<input type="email" placeholder="YOUR EMAIL ADDRESS" class="newsletter-input text-xs font-bold tracking-widest">
+<!-- LOGIN MODAL -->
+<div id="login-modal" class="fixed inset-0 bg-white z-[200] hidden overflow-y-auto">
+    <div class="flex flex-col md:flex-row min-h-screen">
+        <!-- Left Side: Image -->
+        <div class="hidden md:block md:w-1/2 bg-gray-100">
+            <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1200" class="w-full h-full object-cover">
+        </div>
+        <!-- Right Side: Form -->
+        <div class="w-full md:w-1/2 p-10 md:p-24 flex flex-col justify-center relative">
+            <button onclick="toggleLogin()" class="absolute top-10 right-10 text-2xl hover:opacity-50">✕</button>
+            
+            <h2 class="text-5xl serif italic mb-4">The Green House</h2>
+            <h3 class="text-3xl font-bold uppercase tracking-tighter mb-8 leading-tight">Connectez-vous ou créez un compte</h3>
+            
+            <p class="text-xs text-gray-500 mb-10 leading-relaxed max-w-sm">
+                En poursuivant votre navigation, vous acceptez nos termes et conditions. 
+                Veuillez lire notre <span class="underline cursor-pointer">politique de confidentialité</span>.
+            </p>
+
+            <form class="space-y-8 max-w-sm">
+                <div>
+                    <label class="text-[10px] font-bold uppercase tracking-widest block mb-2">Adresse e-mail</label>
+                    <input type="email" class="newsletter-input text-sm" placeholder="votre@email.com">
+                </div>
+                <div>
+                    <label class="text-[10px] font-bold uppercase tracking-widest block mb-2">Pronoms (Optionnel)</label>
+                    <input type="text" class="newsletter-input text-sm" placeholder="elle/il/iel">
+                </div>
+                <button type="submit" class="w-full bg-black text-white text-[11px] font-bold uppercase tracking-[0.2em] py-5 hover:bg-emerald-700 transition">Continuer avec l'e-mail</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- SEARCH OVERLAY -->
+<div id="search-overlay" class="fixed inset-0 bg-white z-[300] hidden overflow-y-auto fade-in">
+    <div class="max-w-6xl mx-auto px-6 py-20 relative">
+        <!-- Close Button -->
+        <button onclick="toggleSearch()" class="absolute top-10 right-10 text-2xl hover:opacity-50">✕</button>
+        
+        <!-- Header -->
+        <div class="text-center mb-16">
+            <h2 class="text-6xl serif italic mb-4">Rechercher un contenu</h2>
+            <p class="text-xs font-bold uppercase tracking-widest text-gray-400">The Green House Journal</p>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="flex border-b-2 border-black mb-12">
+            <div class="flex items-center px-4">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </div>
+            <input type="text" placeholder='Essayez "Salinité des sols"' class="w-full py-6 text-2xl serif italic outline-none">
+            <button class="bg-black text-white px-12 text-xs font-bold uppercase tracking-widest hover:bg-emerald-700 transition">Recherche</button>
+        </div>
+
+        <!-- Suggestions -->
+        <div class="grid md:grid-cols-3 gap-8 opacity-60">
+            <div class="border-t border-gray-200 pt-4">
+                <p class="text-[10px] font-bold uppercase mb-2">Tendance</p>
+                <p class="serif italic">L'impact de l'électromécanique sur l'écologie</p>
+            </div>
+            <div class="border-t border-gray-200 pt-4">
+                <p class="text-[10px] font-bold uppercase mb-2">Populaire</p>
+                <p class="serif italic">Rapports sur la biodiversité 2026</p>
+            </div>
+            <div class="border-t border-gray-200 pt-4">
+                <p class="text-[10px] font-bold uppercase mb-2">Nouveau</p>
+                <p class="serif italic">Économie verte et politique</p>
+            </div>
+        </div>
+    </div>
+</div>
+    <script>
+    function toggleMenu() {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('hidden');
+    }
+
+    function toggleLogin() {
+        const modal = document.getElementById('login-modal');
+        modal.classList.toggle('hidden');
+    }
+function toggleSearch() {
+    const search = document.getElementById('search-overlay');
+    search.classList.toggle('hidden');
+}
+    function showPage(pageId) {
+        document.querySelectorAll('main > div').forEach(div => div.classList.add('hidden-page'));
+        const target = document.getElementById('page-' + pageId);
+        if (target) {
+            target.classList.remove('hidden-page');
+            window.scrollTo(0, 0);
+        }
+    }
+</script>
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+}
+</script>
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
+<span class="notranslate">The Green House</span>
